@@ -1,0 +1,324 @@
+# w:    input
+# z:    stack in base26
+# x,y:  helpers
+// A;B;C;D;E;F;G;H;I;J;K;L;M;N inputs
+
+# input
+inp w
+
+# x = peek stack z // x = 0
+mul x 0
+add x z
+mod x 26
+
+div z 1 // No op
+
+// TEST BLOCK
+add x 11 // x = z.peek + 11
+eql x w  // x = (w == z.peek + 11)
+eql x 0  // x = (w != z.peek + 11) // note w is 1-9, z.peek is empty, so 1-9 will never equal to 11, so the inequality is true!
+// TEST BLOCK
+
+mul y 0  // y = 0
+add y 25 // y = 25
+mul y x  // y = 25 is x test above holds, else 0
+add y 1  // y = 26 or 1 // note that here it is always 26!
+
+mul z y  // currently noop, but this would move the stack forward
+
+mul y 0
+add y w
+add y 6  // y = w + 6
+mul y x  // only works, if the test block is true - it is! else y = 0
+
+add z y  // z += y (or add y to the stack)
+
+// z.push(A + 6)
+
+
+
+inp w
+-- x = peek stack z
+mul x 0
+add x z
+mod x 26
+
+// x = modelNumber[0]+6
+
+div z 1 // no-op
+
+add x 13
+eql x w
+eql x 0 // x = (modelNumber[1] != modelNumber[0]+6 + 13) // always holds, because 11 is bigger than one number
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 14
+mul y x
+add z y
+
+// z.push(B + 14)
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 15
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 14
+mul y x
+add z y
+// z.push(C + 14)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -8
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 10
+mul y x
+add z y
+
+// if D != z.pop() - 8
+//    z.push(D + 10)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 13
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 9
+mul y x
+add z y
+
+// z.push(E + 9)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 15
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 12
+mul y x
+add z y
+
+// z.push(F + 12)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -11
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 8
+mul y x
+add z y
+
+// if G != z.pop() - 11
+//    z.push(G + 8)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -4
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 13
+mul y x
+add z y
+
+// if H != z.pop() - 4
+//    z.push(H + 13)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -15
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 12
+mul y x
+add z y
+
+// if I != z.pop() - 15
+//    z.push(I + 12)
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 14
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 6
+mul y x
+add z y
+
+// z.push(J + 6)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1
+add x 14
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 9
+mul y x
+add z y
+
+// z.push(K + 9)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -1
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 15
+mul y x
+add z y
+
+// if L != z.pop() - 1
+//    z.push(L + 15)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -8
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 4
+mul y x
+add z y
+
+// if M != z.pop() - 8
+//    z.push(M + 4)
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -14
+eql x w
+eql x 0
+mul y 0
+add y 25
+mul y x
+add y 1
+mul z y
+mul y 0
+add y w
+add y 10
+mul y x
+add z y
+
+// if N != z.pop() - 14
+//    z.push(M + 10)
